@@ -12,7 +12,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 app.post('/log-questions', async (req, res) => {
-    const startTime = performance.now();
+    //const startTime = performance.now();
     const questions = req.body.questions;
 
     if (!questions) {
@@ -84,7 +84,7 @@ app.post('/log-questions', async (req, res) => {
 
                 const generatedAnswerId = response.response.text().trim();
 
-                results.push({ question: question, correctAnswerId: generatedAnswerId, type: "multiple_choice",});
+                results.push({ question: question, correctAnswerId: generatedAnswerId, type: "multiple_choice"});
             } catch (error) {
                 console.error(`Chyba při volání Gemini API: ${error}`);
                 results.push({ question: question, error: "Chyba při zpracování otázky." });
@@ -120,7 +120,7 @@ app.post('/log-questions', async (req, res) => {
 
                 const answerIds = generatedAnswerId.split(',').map(id => parseInt(id.trim(), 10));
 
-                results.push({ question: question, correctAnswerIds: answerIds, type: "checkbox", });
+                results.push({ question: question, correctAnswerIds: answerIds, type: "checkbox" });
             } catch (error) {
                 console.error(`Chyba při volání Gemini API: ${error}`);
                 results.push({ question: question, error: "Chyba při zpracování otázky." });
@@ -133,10 +133,10 @@ app.post('/log-questions', async (req, res) => {
     }
 
     res.json(results);
-    const endTime = performance.now();
-    const duration = endTime - startTime;
-    const time = `Execution time: ${duration.toFixed(2)} milliseconds`;
-    console.log(time)
+    //const endTime = performance.now();
+    //const duration = endTime - startTime;
+    //const time = `Execution time: ${duration.toFixed(2)} milliseconds`;
+    //console.log(time)
 });
 
 // Spusťte server
