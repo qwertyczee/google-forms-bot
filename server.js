@@ -53,8 +53,9 @@ app.post('/log-questions', async (req, res) => {
         "top_p": 0.9,
     }
 
+    const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
     const processQuestion = async (questionData) => {
-    
         const question = questionData.question;
         const type = questionData.type;
         const answers = questionData.answers;
@@ -129,7 +130,10 @@ app.post('/log-questions', async (req, res) => {
         }
     };
 
-    await Promise.all(questions.map(processQuestion));
+    for (const question of questions) {
+        await processQuestion(question);
+        await delay(1000);
+    }    
 
     res.json(results);
     const endTime = performance.now();
