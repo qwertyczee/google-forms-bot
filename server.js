@@ -53,9 +53,14 @@ app.post('/log-questions', async (req, res) => {
         "top_p": 0.9,
     }
 
+    let index = 0;
+
     const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
     const processQuestion = async (questionData) => {
+        index = index + 1;
+        console.log(index);
+
         const question = questionData.question;
         const type = questionData.type;
         const answers = questionData.answers;
