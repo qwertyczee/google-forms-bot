@@ -137,7 +137,7 @@ app.post('/log-questions', async (req, res) => {
 
     for (const question of questions) {
         await processQuestion(question);
-        await delay(1000);
+        await delay(300);
     }    
 
     res.json(results);
