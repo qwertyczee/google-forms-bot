@@ -15,6 +15,10 @@ app.post('/log-questions', async (req, res) => {
     const startTime = performance.now();
     const questions = req.body.questions;
 
+    if (!questions) {
+        return res.status(400).json({ error: 'No questions provided' });
+    }
+
     if (questions.length === 0) {
         return res.status(400).json({ error: 'No questions provided' });
     }
